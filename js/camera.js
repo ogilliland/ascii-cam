@@ -54,7 +54,7 @@ function ascii(imgData, width, height, step) {
     var xstep = Math.round(step);
     var ystep = Math.round(step * 1.75);
     for (var y = 0; y < height; y += ystep) {
-        for (var x = 0; x < width; x += xstep) {
+        for (var x = width; x > 0; x -= xstep) {
             var newLum = getLum(imgData, x, y, width, height, xstep, ystep) * (maxLum - minLum) / 255;
             result += charMap[mapLength - Math.round(newLum * mapLength / 255)];
         }
@@ -67,7 +67,7 @@ function getLum(imgData, x, y, width, height, xstep, ystep) {
     var result = 0;
     var count = 0;
     for (var j = 0; j < ystep; j++) {
-        for (var i = 0; i < xstep; i++) {
+        for (var i = xstep; i > 0; i--) {
             if (!isNaN(imgData[(y + j) * width + x + i])) {
                 result += imgData[(y + j) * width + x + i];
                 count++;
