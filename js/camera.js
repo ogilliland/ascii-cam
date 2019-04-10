@@ -5,7 +5,7 @@ var textContainer = document.getElementById('text-container');
 
 var vw, vh, aspect, data, minLum, maxLum;
 
-var charMap = '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,"^`\'. ';
+var charMap = '@%#*+=-:. ';
 var mapLength = charMap.length - 1;
 
 if (navigator.mediaDevices.getUserMedia) {
