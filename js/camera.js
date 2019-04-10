@@ -5,7 +5,8 @@ var textContainer = document.getElementById('text-container');
 
 var vw, vh, aspect, data, minLum, maxLum;
 
-var charMap = '@%#*+=-:. ';
+// var charMap = '@%#*+=-:. ';
+var charMap = '$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,"^`\'. ';
 var mapLength = charMap.length - 1;
 
 if (navigator.mediaDevices.getUserMedia) {
@@ -23,7 +24,7 @@ function draw() {
     vw = video.videoWidth;
     vh = video.videoHeight;
     aspect = vw / vh;
-    step = vw / (window.innerWidth / 8);
+    step = Math.round(5 * vw / window.innerWidth);
     canvas.width = vw;
     canvas.height = vh;
     if (vw * vh != 0) {
@@ -51,7 +52,7 @@ function greyscale(imgData) {
 function ascii(imgData, width, height, step) {
     var result = '';
     var xstep = Math.round(step);
-    var ystep = Math.round(step * 2);
+    var ystep = Math.round(step * 1.75);
     for (var y = 0; y < height; y += ystep) {
         for (var x = 0; x < width; x += xstep) {
             var newLum = getLum(imgData, x, y, width, height, xstep, ystep) * (maxLum - minLum) / 255;
