@@ -54,10 +54,24 @@ function ascii(imgData, width, height, step) {
     var ystep = Math.round(step * 2);
     for (var y = 0; y < height; y += ystep) {
         for (var x = 0; x < width; x += xstep) {
-            var newLum = imgData[y * width + x] * (maxLum - minLum) / 255;
+            var newLum = getLum(imgData, x, y, width, height, xstep, ystep) * (maxLum - minLum) / 255;
             result += charMap[mapLength - Math.round(newLum * mapLength / 255)];
         }
         result += '\u000a';
     }
     return result;
+}
+
+function getLum(imgData, x, y, width, height, xstep, ystep) {
+    var result = 0;
+    var count = 0;
+    for (var j = 0; j < ystep; j++) {
+        for (var i = 0; i < xstep; i++) {
+            if (!isNaN(imgData[(y + j) * width + x + i])) {
+                result += imgData[(y + j) * width + x + i];
+                count++;
+            }
+        }
+    }
+    return result / count;
 }
